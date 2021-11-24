@@ -10,10 +10,10 @@ Entrega de projeto para avaliação na disciplina Mineração a partir de Grande
 
 ## Reprodução e softwares envolvidos
 
-O gerenciamento da base de dados foi realizadas no {PostgreSQL}[https://www.postgresql.org/] versão 14, e as bases de dados carregadas e tratadas o originadas do repositório {FAPESP COVID-19 DataSharing/BR}[https://repositoriodatasharingfapesp.uspdigital.usp.br/] no qual os hospitais analisados foram XXXXXXXXXXXXXXXX.
+O gerenciamento da base de dados foi realizadas no [PostgreSQL](https://www.postgresql.org/) versão 14, e as bases de dados carregadas e tratadas o originadas do repositório [FAPESP COVID-19 DataSharing/BR](https://repositoriodatasharingfapesp.uspdigital.usp.br/) no qual os hospitais analisados foram XXXXXXXXXXXXXXXX.
 
 
 ### Execução
-´´´
+```
 BigDataCovid.sql
-´´´
+```
