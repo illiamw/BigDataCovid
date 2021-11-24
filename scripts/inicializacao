@@ -1,0 +1,97 @@
+-- Carregamento de tabelas
+--  PACIENTES
+
+--  Tabela:
+-- Table: public.paciente
+
+-- -- DROP TABLE IF EXISTS public.paciente;
+
+-- CREATE TABLE IF NOT EXISTS public.paciente
+-- (
+--     "ID_PACIENTE" character(32) COLLATE pg_catalog."default",
+--     "IC_SEXO" character(1) COLLATE pg_catalog."default",
+--     "AA_NASCIMENTO" character(4) COLLATE pg_catalog."default",
+--     "CD_PAIS" character(2) COLLATE pg_catalog."default",
+--     "CD_UF" character(2) COLLATE pg_catalog."default",
+--     "CD_MUNICIPIO" text COLLATE pg_catalog."default",
+--     "CD_CEPREDUZIDO" character(5) COLLATE pg_catalog."default"
+-- )
+
+-- TABLESPACE pg_default;
+
+-- ALTER TABLE IF EXISTS public.paciente
+--     OWNER to postgres;
+
+-- Carregamento arquivo CSV
+-- COPY paciente FROM 'C:/Program Files/PostgreSQL/14/data/base/HSL_Junho2021/HSL_Pacientes_4.csv' DELIMITER ',' CSV HEADER
+
+--  EXAMES
+
+-- Table: public.exames
+
+-- DROP TABLE IF EXISTS public.exames;
+
+-- CREATE TABLE IF NOT EXISTS public.exames
+-- (
+--     "ID_PACIENTE" character(32) COLLATE pg_catalog."default",
+--     "ID_ATENDIMENTO" character(32) COLLATE pg_catalog."default",
+--     "DT_COLETA" date,
+--     "DE_ORIGEM" text COLLATE pg_catalog."default",
+--     "DE_EXAME" text COLLATE pg_catalog."default",
+--     "DE_ANALITO" text COLLATE pg_catalog."default",
+--     "DE_RESULTADO" text COLLATE pg_catalog."default",
+--     "CD_UNIDADE" text COLLATE pg_catalog."default",
+--     "DE_VALOR_REFERENCIA" text COLLATE pg_catalog."default",
+--     CONSTRAINT "ID_ATENDIMENTO" FOREIGN KEY ("ID_ATENDIMENTO")
+--         REFERENCES public.desfecho ("ID_ATENDIMENTO") MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
+--         NOT VALID,
+--     CONSTRAINT "ID_PACIENTE" FOREIGN KEY ("ID_PACIENTE")
+--         REFERENCES public.paciente ("ID_PACIENTE") MATCH SIMPLE
+--         ON UPDATE NO ACTION
+--         ON DELETE NO ACTION
+--         NOT VALID
+-- )
+
+-- TABLESPACE pg_default;
+
+-- ALTER TABLE IF EXISTS public.exames
+--     OWNER to postgres;
+
+
+-- Carregamento arquivo CSV
+-- COPY exames FROM 'C:/Program Files/PostgreSQL/14/data/base/HSL_Junho2021/HSL_Exames_4.csv' DELIMITER '|' CSV HEADER
+
+--  DESFECHOS
+
+-- DROP TABLE IF EXISTS public.desfecho;
+
+-- CREATE TABLE IF NOT EXISTS public.desfecho
+-- (
+--     "ID_PACIENTE" character(32) COLLATE pg_catalog."default",
+--     "ID_ATENDIMENTO" text COLLATE pg_catalog."default" NOT NULL,
+--     "DT_ATENDIMENTO" date,
+--     "DE_TIPO_ATENDIMENTO" text COLLATE pg_catalog."default",
+--     "ID_CLINICA" integer,
+--     "DE_CLINICA" text COLLATE pg_catalog."default",
+--     "DT_DESFECHO" date,
+--     "DE_DESFECHO" text COLLATE pg_catalog."default",
+--     CONSTRAINT desfecho_pkey PRIMARY KEY ("ID_ATENDIMENTO"),
+--     CONSTRAINT "ID_PACIENTE" FOREIGN KEY ("ID_PACIENTE")
+--         REFERENCES public.paciente ("ID_PACIENTE") MATCH SIMPLE
+--         ON UPDATE CASCADE
+--         ON DELETE CASCADE
+--         NOT VALID
+-- )
+
+-- TABLESPACE pg_default;
+
+-- ALTER TABLE IF EXISTS public.desfecho
+--     OWNER to postgres;
+
+
+-- Carregamento arquivo CSV
+-- COPY desfecho FROM 'C:/Program Files/PostgreSQL/14/data/base/HSL_Junho2021/HSL_Desfechos_4.csv' DELIMITER '|' CSV HEADER
+
+select * from desfecho
