@@ -1,0 +1,5 @@
+-- Sumarização Estatistica
+SELECT MIN("AA_NASCIMENTO"),
+MAX("AA_NASCIMENTO"), 
+AVG("AA_NASCIMENTO") AS mean
+FROM pacientes;
