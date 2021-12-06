@@ -1,0 +1,6 @@
+-- EXECICIO 2 - 2
+
+SELECT COUNT(*) FROM pacientes;
+SELECT COUNT(*) FROM pacientes WHERE "IC_SEXO" = 'M';
+SELECT COUNT(*) FROM pacientes WHERE "IC_SEXO" = 'F';
+
