@@ -1,1 +1,0 @@
-SELECT 'IC_SEXO' FROM pacientes
