@@ -32,7 +32,21 @@ COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1970 AND "AA_NASCIMENTO" > (1960))   A
 COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1960 AND "AA_NASCIMENTO" > (1950))   AS "60-70",
 COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1950 AND "AA_NASCIMENTO" > (1940))   AS "70-80",
 COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1940 AND "AA_NASCIMENTO" > (1930))   AS "80-90"
-FROM pacientes;
+FROM pacientes
+WHERE "IC_SEXO" = 'M';
+
+SELECT 
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 2020 AND "AA_NASCIMENTO" > (2010))   AS "1-10",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 2010 AND "AA_NASCIMENTO" > (2000))   AS "10-20",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 2000 AND "AA_NASCIMENTO" > (1990))   AS "20-30",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1990 AND "AA_NASCIMENTO" > (1980))   AS "30-40",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1980 AND "AA_NASCIMENTO" > (1970))   AS "40-50",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1970 AND "AA_NASCIMENTO" > (1960))   AS "50-60",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1960 AND "AA_NASCIMENTO" > (1950))   AS "60-70",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1950 AND "AA_NASCIMENTO" > (1940))   AS "70-80",
+COUNT(*) FILTER (WHERE "AA_NASCIMENTO" <= 1940 AND "AA_NASCIMENTO" > (1930))   AS "80-90"
+FROM pacientes
+WHERE "IC_SEXO" = 'F';
 
 -- Qual a maior quantidade de exames solicitados para um único
 -- paciente ?
@@ -61,49 +75,39 @@ GROUP BY "IC_SEXO"
 -- Quantos exames de Coronavírus (2019-nCoV) foram solicitados?
 -- Quantos deles apresentam resultado positivo?
 
-SELECT *
+SELECT COUNT(*) as TotalSolicitacoesCovid
 FROM exames
-WHERE "DE_EXAME" LIKE '%COVID%' 
-ORDER BY "DE_EXAME";
-
-SELECT DISTINCT "DE_ANALITO"
-FROM exames
-WHERE "DE_RESULTADO" LIKE '%DET%' 
-ORDER BY "DE_ANALITO";
-
-SELECT DISTINCT "DE_ANALITO"
-FROM exames 
-WHERE ("DE_ANALITO" LIKE '%Covid%' OR "DE_ANALITO" LIKE '%Coro%')
-ORDER BY "DE_ANALITO";
+WHERE "DE_ANALITO" LIKE '%Coronavírus (2019-nCoV)%';
 
 SELECT DISTINCT "DE_RESULTADO"
 FROM exames
-WHERE 	"DE_ANALITO" = 'Covid 19, Anti-Spike Neutralizantes' OR
-		"DE_ANALITO" = 'Covid 19, Anticorpos IgA' OR
-		"DE_ANALITO" = 'Covid 19, Anticorpos IgG, Quimioluminescência' OR
-		"DE_ANALITO" = 'Covid 19, Anticorpos IgG, teste rápido' OR
-		"DE_ANALITO" = 'Covid 19, Anticorpos Totais, Eletroquimiolumi' OR
-		"DE_ANALITO" = 'Covid 19, Detecção por PCR%' OR
-		"DE_ANALITO" = 'Covid 19, Sorologia - Conclusão' OR
-		"DE_ANALITO" = 'Covid 19, Anticorpos IgG' 
-ORDER BY "DE_RESULTADO" DESC;
+WHERE "DE_ANALITO" LIKE '%Coronavírus (2019-nCoV)%';
 
-SELECT DISTINCT "DE_ANALITO"
+SELECT COUNT(*) as TotalSolicitacoesCovidPositivos
 FROM exames
-WHERE "DE_RESULTADO" LIKE '%POSI%'
-ORDER BY "DE_ANALITO";
-
-SELECT *
-FROM exames
-WHERE "DE_RESULTADO" LIKE '%POSI%'
-ORDER BY "DE_ANALITO";
-
-
-SELECT *
-FROM exames
-WHERE "DE_ANALITO" = 'Covid 19, Anticorpos IgA'
-ORDER BY "DE_RESULTADO";
-
+WHERE ("DE_ANALITO" LIKE '%Coronavírus (2019-nCoV)%')
+AND
+("DE_RESULTADO" = 'DETECTADO'
+ OR
+ "DE_RESULTADO" = 'DETECTADO (POSITIVO)'
+ OR
+ "DE_RESULTADO" = 'DETECTÁVEL');
+ 
+-- Para cada idade, mostre os resultados dos exames de Coronavírus (2019-nCoV).
+SELECT COUNT(*) as PositivosPorIdade
+	FROM(
+	SELECT "ID_PACIENTE"
+	FROM exames
+	WHERE ("DE_ANALITO" LIKE '%Coronavírus (2019-nCoV)%')
+	AND
+		("DE_RESULTADO" = 'DETECTADO'
+ 		OR
+ 		"DE_RESULTADO" = 'DETECTADO (POSITIVO)'
+ 		OR
+ 		"DE_RESULTADO" = 'DETECTÁVEL')
+	) AS subquery
+	INNER JOIN pacientes ON subquery."ID_PACIENTE" = pacientes."ID_PACIENTE"
+	GROUP BY "AA_NASCIMENTO";
 
 -- Qual é o desfecho para a maioria dos casos registrados?
 
