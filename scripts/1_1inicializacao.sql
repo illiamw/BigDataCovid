@@ -65,6 +65,7 @@ DROP TABLE IF EXISTS public.exames CASCADE;
 
 CREATE TABLE IF NOT EXISTS public.exames
 (
+	id SERIAL,
     "ID_PACIENTE" character(32) ,
     "ID_ATENDIMENTO" character(32) ,
     "DT_COLETA" date,
@@ -74,6 +75,7 @@ CREATE TABLE IF NOT EXISTS public.exames
     "DE_RESULTADO" text ,
     "CD_UNIDADE" text ,
     "DE_VALOR_REFERENCIA" text ,
+	PRIMARY KEY (id),
     CONSTRAINT "ID_PACIENTE" FOREIGN KEY ("ID_PACIENTE")
         REFERENCES public.pacientes ("ID_PACIENTE") MATCH SIMPLE
         ON UPDATE CASCADE
@@ -88,7 +90,15 @@ ALTER TABLE IF EXISTS public.exames
 
 
 -- Carregamento arquivo CSV
-COPY exames FROM 'C:/Program Files/PostgreSQL/14/data/base/HSL_Junho2021/HSL_Exames_4.csv' DELIMITER '|' CSV HEADER;
+COPY exames("ID_PACIENTE",
+    "ID_ATENDIMENTO",
+    "DT_COLETA",
+    "DE_ORIGEM",
+    "DE_EXAME",
+    "DE_ANALITO" ,
+    "DE_RESULTADO" ,
+    "CD_UNIDADE",
+    "DE_VALOR_REFERENCIA") FROM 'C:/Program Files/PostgreSQL/14/data/base/HSL_Junho2021/HSL_Exames_4.csv' DELIMITER '|' CSV HEADER;
 
 
 
