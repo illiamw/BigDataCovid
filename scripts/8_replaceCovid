@@ -46,23 +46,23 @@ SELECT DISTINCT "DE_RESULTADO"
 		order by "DE_RESULTADO" DESC;
 	
 -- Teste da manipulação dos volores ante de realizar o update	
-SELECT "DE_VALOR_REFERENCIA","DE_RESULTADO",
+SELECT id, "DE_VALOR_REFERENCIA","DE_RESULTADO",
 	TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9') AS valor,
 	(CASE
-		WHEN TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9')::numeric  > TO_NUMBER( "DE_RESULTADO", '99999D9999')::numeric  THEN 'Negativo'
-		ELSE 'Positivo'
-	END) as "replace"
-	FROM exames
-	WHERE (
-		(("DE_ANALITO" LIKE '%Covid 19%' OR "DE_ANALITO" LIKE '%Coronavírus%')
-		AND
-		LOWER("DE_VALOR_REFERENCIA") LIKE '%inferior%')
-		AND
-			("DE_RESULTADO" NOT LIKE '%sup%'
+			WHEN TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9')::numeric  > TO_NUMBER( "DE_RESULTADO", '99999D9999')::numeric  THEN 'Negativo'
+			ELSE 'Positivo'
+		END) as replacevalor
+		FROM exames
+		WHERE (
+			(("DE_ANALITO" LIKE '%Covid 19%' OR "DE_ANALITO" LIKE '%Coronavírus%')
 			AND
-			 "DE_RESULTADO" NOT LIKE '%REA%'
+			LOWER("DE_VALOR_REFERENCIA") LIKE '%inferior%')
 			AND
-			 "DE_RESULTADO" NOT LIKE '%N%')
+				("DE_RESULTADO" NOT LIKE '%sup%'
+				AND
+				 "DE_RESULTADO" NOT LIKE '%REA%'
+				AND
+				 "DE_RESULTADO" NOT LIKE '%N%')
 	)
 		
 		order by "DE_RESULTADO" DESC;
@@ -71,36 +71,29 @@ SELECT "DE_VALOR_REFERENCIA","DE_RESULTADO",
 -- Updade dos valores  para ‘Positivo’ e ‘Negativo’ considerando o atributo ‘DE_VALOR_REFERENCIA’
 	
 UPDATE  exames
-	SET "DE_RESULTADO" =(CASE
-		WHEN TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9')::numeric  > TO_NUMBER( "DE_RESULTADO", '99999D9999')::numeric  THEN 'Negativo'
-		ELSE 'Positivo'
-	END)
-	WHERE (
-		(("DE_ANALITO" LIKE '%Covid 19%' OR "DE_ANALITO" LIKE '%Coronavírus%')
-		AND
-		LOWER("DE_VALOR_REFERENCIA") LIKE '%inferior%')
-		AND
-			("DE_RESULTADO" NOT LIKE '%sup%'
+	SET "DE_RESULTADO" = subquery.replacevalor
+	FROM (
+		SELECT id,
+		TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9') AS valor,
+		(CASE
+			WHEN TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9')::numeric  > TO_NUMBER( "DE_RESULTADO", '99999D9999')::numeric  THEN 'Negativo'
+			ELSE 'Positivo'
+		END) as replacevalor
+		FROM exames
+		WHERE (
+			(("DE_ANALITO" LIKE '%Covid 19%' OR "DE_ANALITO" LIKE '%Coronavírus%')
 			AND
-			 "DE_RESULTADO" NOT LIKE '%REA%'
+			LOWER("DE_VALOR_REFERENCIA") LIKE '%inferior%')
 			AND
-			 "DE_RESULTADO" NOT LIKE '%N%')
-	);
+				("DE_RESULTADO" NOT LIKE '%sup%'
+				AND
+				 "DE_RESULTADO" NOT LIKE '%REA%'
+				AND
+				 "DE_RESULTADO" NOT LIKE '%N%')
+		)
+
+	)AS subquery
+	WHERE exames.id = subquery.id;
 	
-SELECT "DE_VALOR_REFERENCIA","DE_RESULTADO",
-	TO_NUMBER(SUBSTRING( "DE_VALOR_REFERENCIA", 11, 14) , '99D9') AS valor
-	FROM exames
-	WHERE (
-		(("DE_ANALITO" LIKE '%Covid 19%' OR "DE_ANALITO" LIKE '%Coronavírus%')
-		AND
-		LOWER("DE_VALOR_REFERENCIA") LIKE '%inferior%')
-		AND
-			("DE_RESULTADO" NOT LIKE '%sup%'
-			AND
-			 "DE_RESULTADO" NOT LIKE '%REA%'
-			AND
-			 "DE_RESULTADO" NOT LIKE '%N%')
-	)
-		
-		order by "DE_VALOR_REFERENCIA" DESC;
+
 	
