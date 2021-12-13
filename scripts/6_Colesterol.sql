@@ -1,0 +1,4 @@
+select "ID_PACIENTE", "DT_COLETA", "DE_ANALITO", Avg(REPLACE("DE_RESULTADO", ',','.')::DECIMAL) from exames
+WHERE ("DE_EXAME" LIKE '%Colesterol%')
+AND "DE_RESULTADO" ~ '^[0-9\.\,]+$'
+GROUP BY "ID_PACIENTE", "DT_COLETA", "DE_ANALITO", "DE_RESULTADO";
