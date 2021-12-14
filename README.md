@@ -1,5 +1,5 @@
 # BigDataCovid
-Entrega de projeto para avaliação na disciplina Mineração a partir de Grandes Bases de Dados - SCC0244 junto ao docente **Caetano Traina Jr.** e monitor **Erikson Júlio de Aguiar**.
+Entrega de projeto para avaliação na disciplina Mineração a partir de Grandes Bases de Dados - SCC0244 junto ao docente **Caetano Traina Jr.** e monitor **Erikson Júlio de Aguiar**, Universidade de São Paulo - USP.
 
 ## Composição do repositório
 **Analise.pdf**: Resolução das questões propostas para a aplicação dos conceitos da disciplina, com trechos de SQL, resultados de consultas, ilustrações e demais representações pertinentes.
@@ -12,7 +12,7 @@ Entrega de projeto para avaliação na disciplina Mineração a partir de Grande
 
 ## Reprodução e softwares envolvidos
 
-O gerenciamento da base de dados foi realizadas no [PostgreSQL](https://www.postgresql.org/) versão 14, e as bases de dados carregadas e tratadas o originadas do repositório [FAPESP COVID-19 DataSharing/BR](https://repositoriodatasharingfapesp.uspdigital.usp.br/) no qual os hospital analisado foi Hospital Sírio-Libanês. E para questões especificas foram utilizadas as tabelas exames dos demais hospitais Beneficência Portuguesa de São Paulo ,Hospital das Clinicas da Faculdade de Medicina da Universidade de Sao Paulo, GrupoFleury, Hospital Israelita Albert Einstein e Hospital Sírio-Libanês.
+O gerenciamento da base de dados foi realizadas no [PostgreSQL](https://www.postgresql.org/) versão 14, e as bases de dados carregadas e tratadas, são originadas do repositório [FAPESP COVID-19 DataSharing/BR](https://repositoriodatasharingfapesp.uspdigital.usp.br/) contendo conjunto de bases de dados de instituições de saúde referente a complicações de covid, no qual o hospital analisado foi **Hospital Sírio-Libanês**. E para questões especificas foram utilizadas as tabelas **exames** dos demais hospitais: Beneficência Portuguesa de São Paulo ,Hospital das Clinicas da Faculdade de Medicina da Universidade de Sao Paulo, GrupoFleury, Hospital Israelita Albert Einstein e Hospital Sírio-Libanês.
 
 
 ### Execução de UPDATES e CREATES
