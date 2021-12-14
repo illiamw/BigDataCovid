@@ -22,4 +22,17 @@ FROM pacientes
 WHERE "AA_NASCIMENTO" ISNULL;
 
 
--- IC_SEXO
+-- EXAMES ----------------------------------
+
+SELECT COUNT(*),
+MIN("DT_COLETA"),
+MAX("DT_COLETA")
+FROM exames;
+
+-- Desfechos ----------------------------------
+
+SELECT COUNT(*),
+MIN("DT_DESFECHO"),
+MAX("DT_DESFECHO")
+FROM desfechos;
+
