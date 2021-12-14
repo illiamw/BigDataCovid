@@ -5,16 +5,13 @@ FROM pacientes
 GROUP BY Idade
 ORDER BY Idade;
 
-SELECT  Min((2020-"AA_NASCIMENTO")) Mi, Max((2020-"AA_NASCIMENTO")) Ma
-FROM pacientes
-
 --- Vizualização de cada idade nos bins
 
 WITH MinMax AS (SELECT  Min((2020-"AA_NASCIMENTO")) Mi, Max((2020-"AA_NASCIMENTO")) Ma
 FROM pacientes)
+
 SELECT (2020-"AA_NASCIMENTO") as Idade,
-Width_bucket((2020-"AA_NASCIMENTO"), (SELECT Mi FROM MinMax),
-(SELECT Ma FROM MinMax) + 1, 2) as Bin,
+Width_bucket((2020-"AA_NASCIMENTO"), (SELECT Mi FROM MinMax),(SELECT Ma FROM MinMax) + 1, 2) as Bin,
 Count(*) Conta
 FROM pacientes
 GROUP BY Idade ORDER BY Idade;
