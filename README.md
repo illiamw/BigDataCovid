@@ -6,7 +6,7 @@ Entrega de projeto para avaliação na disciplina Mineração a partir de Grande
 
 **./bases**: Todas as bases analisadas acompanhando descrição de conteúdo em arquivo de texto (*descricao.csv*) como dicionário das bases utilizadas.
 
-**./scripts**: Todos os comandos executados para compor a resolução das questões propostas no enunciado do projeto segundo a nomeclatura _NumeroQuestao_ _ _NumeroItem_Descrição.sql (por exemplo, 2_2EstatisticasEspecificas.sql).
+**./scripts**: Todos os comandos executados para compor a resolução das questões propostas no enunciado do projeto segundo a nomeclatura _NumeroQuestao_ _ _NumeroItem_ _Descrição.sql (por exemplo, 2_2EstatisticasEspecificas.sql).
 
 **./scripts/Resultados**: Alguns resultados extensos que não convêm espaço no arquivo **Analise.pdf**, e seguindo a nomeclatura _NumeroQuestao_ _ _NumeroItem_Descrição.sql (por exemplo, 2_2PositivosPorIdade.csv).
 
