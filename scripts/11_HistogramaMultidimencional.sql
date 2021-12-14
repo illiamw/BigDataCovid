@@ -49,7 +49,7 @@ FROM exames)
 SELECT 
 	DIMENSOES.OrigemCol,
 	DIMENSOES.ExamesCol,	
-	Count(*)
+	Count(*) Contagem
 	FROM DIMENSOES
 	GROUP BY DIMENSOES.OrigemCol, DIMENSOES.ExamesCol
 	ORDER BY DIMENSOES.OrigemCol, DIMENSOES.ExamesCol;
