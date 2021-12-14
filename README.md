@@ -8,6 +8,8 @@ Entrega de projeto para avaliação na disciplina Mineração a partir de Grande
 
 **./scripts**: Todos os comandos executados para compor a resolução das questões propostas no enunciado do projeto segundo a nomeclatura _NumeroQuestao_ _ _NumeroItem_Descrição.sql (por exemplo, 2_2EstatisticasEspecificas.sql).
 
+**./scripts/Resultados**: Alguns resultados extensos que não convêm espaço no arquivo **Analise.pdf**, e seguindo a nomeclatura _NumeroQuestao_ _ _NumeroItem_Descrição.sql (por exemplo, 2_2PositivosPorIdade.csv).
+
 ## Reprodução e softwares envolvidos
 
 O gerenciamento da base de dados foi realizadas no [PostgreSQL](https://www.postgresql.org/) versão 14, e as bases de dados carregadas e tratadas o originadas do repositório [FAPESP COVID-19 DataSharing/BR](https://repositoriodatasharingfapesp.uspdigital.usp.br/) no qual os hospital analisado foi Hospital Sírio-Libanês.
